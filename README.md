@@ -1,5 +1,7 @@
 # Personal Assistant Voice Agent
 
+[![Tests](https://github.com/abhi-0404/personal_assistant_voice_agent/actions/workflows/tests.yml/badge.svg)](https://github.com/abhi-0404/personal_assistant_voice_agent/actions/workflows/tests.yml)
+
 ## Overview
 
 A FastAPI-based backend service for a personal assistant voice agent integrated with Vapi AI. This project demonstrates how to build a structured, scalable API that handles todo lists, reminders, and calendar events through voice commands processed by artificial intelligence. The application follows clean architecture principles and implements industry best practices for building production-ready APIs.
@@ -241,11 +243,19 @@ This enables the application to handle multiple concurrent requests without bloc
 
 ## Testing
 
-For testing the API:
+### Automated tests
 
-1. **Manual Testing**: Use Swagger UI at `/docs`
-2. **Tool Testing**: Use curl or Postman
-3. **Automated Testing**: Create pytest tests for each layer
+The `tests/` suite drives the real FastAPI app end to end through Vapi-style tool calls, against a throwaway in-memory SQLite database (your `database.db` is never touched). It covers todos, reminders and calendar entries, plus request validation (wrong function name, invalid or missing arguments) and the OpenAPI schema. It runs on every push and pull request through GitHub Actions.
+
+```bash
+pip install -r requirements-dev.txt
+pytest -q
+```
+
+### Manual testing
+
+1. **Swagger UI** at `/docs`
+2. **curl or Postman** against the endpoints below
 
 Example test request:
 ```bash
